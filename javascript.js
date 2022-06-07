@@ -7,11 +7,13 @@ function game () {
     }
 }
 
-function playRound (round){
-    const playerSelection = playerChoice () ;
+function playRound (weapon){
+    let playerSelection = weapon;
     const computerSelection = computerPlay () ;
     const winner = checkWinner(playerSelection, computerSelection);
     winners.push(winner);
+    let round = 0;
+    round ++; 
     logRound(playerSelection, computerSelection, winner, round );
 }
 
@@ -78,4 +80,24 @@ function logRound(playerChoice, computerChoice, winner, round){
     else console.log ('Tie');
     console.log('------------------------');
 }
+
+
+function playRock() {
+    playRound('rock');
+}function playScissors() {
+    playRound('scissors');
+}function playPaper() {
+    playRound('paper');
+}
+
+const rockButton = document.querySelector('#rock');
+rockButton.addEventListener('click', playRock);  
+
+
+const paperButton = document.querySelector('#paper');
+paperButton.addEventListener('click', playPaper);
+
+const scissorsButton = document.querySelector('#scissors');
+scissorsButton.addEventListener('click', playScissors);
+
 
