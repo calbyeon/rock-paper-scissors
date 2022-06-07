@@ -3,18 +3,18 @@ const winners = [];
 
 function game () {
     for(let i = 1; i <= 5; i++) {
-        playRound(i);
+        playRound(weapon, i);
     }
 }
 
-function playRound (weapon){
+function playRound (weapon, round){
     let playerSelection = weapon;
     const computerSelection = computerPlay () ;
     const winner = checkWinner(playerSelection, computerSelection);
     winners.push(winner);
-    let round = 0;
-    round ++; 
-    logRound(playerSelection, computerSelection, winner, round );
+
+    logRound(playerSelection, computerSelection, winner, round);
+    
 }
 
 
