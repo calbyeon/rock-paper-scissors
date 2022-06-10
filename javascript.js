@@ -1,21 +1,38 @@
 const choices = ['rock', 'paper', 'scissors'];
 const winners = [];
 
-function game () {
-    for(let i = 1; i <= 5; i++) {
-        playRound(weapon, i);
-    }
-}
+let playerScore = 0;
+let compScore = 0;
+let round = 0;
 
-function playRound (weapon, round){
+const results = document.querySelector('.results');
+const playerWin = document.createElement('div');
+playerWin.classList.add('playerWin');
+
+const roundCount = document.querySelector('.round');
+roundCount.textContent = 'Round: ' + round;
+
+function playRound (weapon){
     let playerSelection = weapon;
     const computerSelection = computerPlay () ;
     const winner = checkWinner(playerSelection, computerSelection);
     winners.push(winner);
-
-    logRound(playerSelection, computerSelection, winner, round);
-    
+    ++round;
+    if (round < 5){
+        logRound(playerSelection, computerSelection, winner, round);
+    }
+    else if (round == 5){
+        logRound(playerSelection, computerSelection, winner, round);
+        logWins();
+    }
+    else {
+        round = 0;
+        playRound(weapon);
+    }
+    playerWin.textContent = 'Player:' + playerScore;
+    roundCount.textContent = 'Round: ' + round;
 }
+
 
 
 function computerPlay () {
@@ -54,9 +71,12 @@ function checkWinner(choiceP, choiceC){
         (choiceP === 'paper' && choiceC == 'rock') ||
         (choiceP === 'scissors' && choiceC == 'paper')
     ){  
+        ++playerScore;
         return 'Player';
     } else {
+        ++compScore;
         return 'Computer';
+        
     }
 }
 
